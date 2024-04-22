@@ -30,8 +30,8 @@
               <a class="navbar-item active" href="#">Регистрация</a>
               <a class="navbar-item" href="#">Авторизация</a>
               {% else %}
+              <a class="navbar-item" href="{% url 'orders_all' %}">Все заказы</a>
               <!-- <h1>{{ request.user.role }}</h1> -->
-              <a class="navbar-item" href="{% url 'orders_all' %}">Все заказы</a>   
                 {% if request.user.role %}
                     <a class="navbar-item" href="{% url 'post_orders' %}">Создать заказ</a>
                     <a class="navbar-item" href="{% url 'my_orders' %}">Мои заказы</a>
@@ -99,7 +99,6 @@
                     <th> Id </th>
                     <th> Текст </th>
                     <th> Автор </th>
-                    <th> Выполнить </th>
                 </tr>
             </thead>
             <tbody>
@@ -108,13 +107,6 @@
                     <td>{{ pok.id }}</td>
                     <td>{{ pok }}</td>
                     <td>{{ pok.author_id }}</td>
-                    <td>
-                        <form method="post" action="">
-                            {% csrf_token %}
-                            <button name="chosen_order" value="{{pok.id}}" type="submit">Выбрать</button>
-                            <!-- <input type="submit" value="{{pok.id}}" name="chosen_order"/> -->
-                        </form>    
-                    </td>
                 {% endfor %}  
                 
                 </tr>

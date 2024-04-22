@@ -22,31 +22,24 @@
                 {{request.user}}
               </div>
             </div>
-            
-            <!-- <svg class="app-menu" width="16px" height="16px" viewBox="0 0 26.75 26.75" fill="#fff">
-              <circle cx="3.25" cy="3.25" r="3.25"/>
-              <circle cx="13.38" cy="3.25" r="3.25"/>
-              <circle cx="23.5" cy="3.25" r="3.25"/>
-              <circle cx="3.25" cy="13.38" r="3.25"/>
-              <circle cx="13.38" cy="13.38" r="3.25"/>
-              <circle cx="23.5" cy="13.38" r="3.25"/>
-              <circle cx="3.25" cy="23.5" r="3.25"/>
-              <circle cx="13.38" cy="23.5" r="3.25"/>
-              <circle cx="23.5" cy="23.5" r="3.25"/>
-            </svg> -->
           </div>
         </div>
         <div class="navbar">
           <div class="navbar-item-wrapper">
             {% if not user.is_authenticated %}
+            
               <a class="navbar-item active" href="#">Регистрация</a>
               <a class="navbar-item" href="#">Авторизация</a>
             {% else %}
-            {% if request.user.role %}
-            <a class="navbar-item" href="{% url 'post_orders' %}">Создать заказ</a>
+                <a class="navbar-item" href="{% url 'orders_all' %}">Все заказы</a>
+                {% if request.user.role %}
+                <a class="navbar-item" href="{% url 'post_orders' %}">Создать заказ</a>
+                <a class="navbar-item" href="{% url 'my_orders' %}">Мои заказы</a>
+                {% if not request.user.role %}
+                <a class="navbar-item" href="{% url 'my_orders' %}">Заказы</a>
+                {% endif %}
             {% endif %}
-            <a class="navbar-item" href="{% url 'my_orders' %}">Мои заказы</a>
-            <a class="navbar-item" href="#">Выйти</a>
+                <a class="navbar-item" href="#">Выйти</a>
             {% endif %}
           </div>
           <svg class="hamburger-menu" width="28px" height="15px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 15">
@@ -73,7 +66,15 @@
 </head>
 
 <body>
-    <h1 class="navbar">Список заказов: </h1> 
+    {% if user.is_authenticated %}
+        <form method="post" action="">
+            {% csrf_token %}
+            <p>Введите текст заказа:<br> <input name="order_name" /></p>
+            <input type="submit" value="Создать!" />
+        </form>
+    {% else %}
+        <h5>Вы не авторизованы!</h5>
+    {% endif %}
 </body>
 
 </html>

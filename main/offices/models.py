@@ -10,8 +10,7 @@ answers = [
         (True, 'Да'),
         (False, 'Нет')
     ]
-
-    
+ 
 role_list = (
     (True, 'Клиент'),
     (False, 'Исполнитель')

@@ -10,10 +10,9 @@
   <header>
     <div class="header">
         <div class="top">
-          <svg class="logo" width="172px" height="55px" viewBox="0 0 172 55" fill="#fff">
+          <!-- <svg class="logo" width="172px" height="55px" viewBox="0 0 172 55" fill="#fff">
               <text x="5px" y="35px">заказы</text>
-      
-          </svg>
+          </svg> -->
           <div class="right-wrapper">
 
             <div class="profile-pic">
@@ -22,18 +21,6 @@
                 {{request.user}}
               </div>
             </div>
-            
-            <!-- <svg class="app-menu" width="16px" height="16px" viewBox="0 0 26.75 26.75" fill="#fff">
-              <circle cx="3.25" cy="3.25" r="3.25"/>
-              <circle cx="13.38" cy="3.25" r="3.25"/>
-              <circle cx="23.5" cy="3.25" r="3.25"/>
-              <circle cx="3.25" cy="13.38" r="3.25"/>
-              <circle cx="13.38" cy="13.38" r="3.25"/>
-              <circle cx="23.5" cy="13.38" r="3.25"/>
-              <circle cx="3.25" cy="23.5" r="3.25"/>
-              <circle cx="13.38" cy="23.5" r="3.25"/>
-              <circle cx="23.5" cy="23.5" r="3.25"/>
-            </svg> -->
           </div>
         </div>
         <div class="navbar">
@@ -42,6 +29,7 @@
               <a class="navbar-item active" href="#">Регистрация</a>
               <a class="navbar-item" href="#">Авторизация</a>
             {% else %}
+            <a class="navbar-item" href="{% url 'orders_all' %}">Все заказы</a>
             {% if request.user.role %}
             <a class="navbar-item" href="{% url 'post_orders' %}">Создать заказ</a>
             {% endif %}
@@ -71,9 +59,10 @@
       </div>
  </header>
 </head>
-
+{% block content %}
 <body>
-    <h1 class="navbar">Список заказов: </h1> 
+  
 </body>
+{% endblock %}
 
 </html>

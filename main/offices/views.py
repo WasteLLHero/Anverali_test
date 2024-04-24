@@ -20,12 +20,9 @@ def registration(request):
         form = MyCustomUserForm()
     return render(request, 'register.html', {'form': form})
 
-    
-
 class OrderListView(View):
     def get(self, request):
         order_list = Order.objects.filter(executor_id=None)
-        print(f'Это список заказов -> {order_list[0].executor_id}')
         if (not request.user.is_anonymous):
             if (request.user.role):
                 return render(request, "orders_list.html", {'response': order_list})
@@ -37,31 +34,22 @@ class OrderListView(View):
     def post(self, request):
         order_list = Order.objects.filter(executor_id=None)
         choice_order_to_complete = request.POST.get('chosen_order')
-        print(f'Кнопка нажата! - - - {choice_order_to_complete}')
         choisen_order = Order.objects.filter(id=choice_order_to_complete)
         choisen_order.update(executor_id = OrderToEcutor.objects.create(executor_id = request.user))
-        print(f'Выбранная запись - {choisen_order}')
         return render(request, "orders_list.html", {'response': order_list})
-
-        
-    
     
 class CreateOrderView(View):
     def get(self, request):
-        print('Открыл')
         return render(request, "create_order.html", {'response': 1})
     def post(self, request):
         new_text_from_form = request.POST.get('order_name', None)
-        print(new_text_from_form)
         if(new_text_from_form != None):
             new_order_keys = OrderToAuthor.objects.create(user_id = request.user )
             new_order = Order.objects.create(text = new_text_from_form, author_id = new_order_keys)
             new_order_keys.save()
             new_order.save()
-        print(f'Тест -> {new_text_from_form}')
         return render(request, "create_order.html", {'response': new_text_from_form})
         
-
 class OrderPersonalListView(View):
     def get(self, request):
         order_list = Order.objects.filter(author_id__user_id = request.user.id)

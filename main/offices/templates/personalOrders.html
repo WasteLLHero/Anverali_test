@@ -1,69 +1,7 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Заказы!</title>
-  <link rel="stylesheet" href="{% static 'base_html.css'%}">
-  <header>
-    <div class="header">
-        <div class="top">
-          <svg class="logo" width="172px" height="55px" viewBox="0 0 172 55" fill="#fff">
-              <text x="5px" y="35px">заказы</text>
-      
-          </svg>
-          <div class="right-wrapper">
-
-            <div class="profile-pic">
-              <div class="picture"></div>
-              <div class="profile-name">
-                {{request.user}}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="navbar">
-          <div class="navbar-item-wrapper">
-              {% if not user.is_authenticated %}
-              <a class="navbar-item active" href="#">Регистрация</a>
-              <a class="navbar-item" href="#">Авторизация</a>
-              {% else %}
-              <a class="navbar-item" href="{% url 'orders_all' %}">Все заказы</a>
-              <!-- <h1>{{ request.user.role }}</h1> -->
-                {% if request.user.role %}
-                    <a class="navbar-item" href="{% url 'post_orders' %}">Создать заказ</a>
-                    <a class="navbar-item" href="{% url 'my_orders' %}">Мои заказы</a>
-                {% else %}
-                    <a class="navbar-item" href="{% url 'executor_orders' %}">Заказы на выполнения</a>
-
-                {% endif %}
-                <a class="navbar-item" href="#">Выйти</a>
-            {% endif %}
-          </div>
-          <svg class="hamburger-menu" width="28px" height="15px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 15">
-              <line x1="1.5" y1="1.5" x2="26.5" y2="1.5"/>
-              <line x1="1.5" y1="7.5" x2="26.5" y2="7.5"/>
-              <line x1="1.5" y1="13.5" x2="26.5" y2="13.5"/>
-          </svg>
-          <div class="search-wrapper">
-            <input class="search-input" placeholder="SEARCH" type="text" />
-            <svg width="13px" height="13px" class="search-icon" viewBox="0 0 13 13">
-              <path fill="#999999" d="M12,13a1,1,0,0,1-.7-.3L8.62,10A5.5,5.5,0,1,1,10,8.62l2.68,2.68A1,1,0,0,1,12,13ZM5.5,2A3.5,3.5,0,1,0,9,5.5,3.5,3.5,0,0,0,5.5,2Z"/>
-            </svg>
-          </div>
-          <div class="sidebar">
-            <svg class="close-sidebar hamburger-menu" width="27px" height="18px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.98 18.38">
-              <line class="cls-1" x1="26.23" y1="9.19" x2="0.75" y2="9.19"/>
-              <line class="cls-1" x1="11.37" y1="0.75" x2="0.75" y2="9.19"/>
-              <line class="cls-1" x1="11.37" y1="17.63" x2="0.75" y2="9.19"/>
-            </svg>
-          </div>
-        </div>
-      </div>
- </header>
-</head>
+{% block content %}
 
 <body>
     {% if user.is_authenticated %}
@@ -117,4 +55,4 @@
     
 </body>
 
-</html>
+{% endblock %}

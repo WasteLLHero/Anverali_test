@@ -81,11 +81,11 @@ LOGOUT_REDIRECT_URL = '/main'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Anverali_test',
-        'USER': 'postgres',
+        'NAME': '',
+        'USER': '',
         'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': 5432
+        'HOST': '',
+        'PORT': 'PORT'
     }
 }
 # TEMPLATES = [

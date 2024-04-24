@@ -7,4 +7,4 @@
 #### Во время регистрации система предлагает выбрать роль.
 #### Клиент может размещать заказ, исполнитель брать заказ.
 #### Логика реализована при помощи кастомизации модели User (из-за этого могут быть проблемы с созданием superuser, Django не выставляет флажок is_staf по-умолчанию (что не дает заходить в /admin). Но его можно доставить вручную.)
-#### git clone -> cd main -> pip install -r requirements.txt  -> py manage.py makimgrations -> py manage.py migrate
+#### git clone -> cd main -> pip install -r requirements.txt  -> py manage.py makimgrations -> py manage.py migrate -> py manage.py runserver
